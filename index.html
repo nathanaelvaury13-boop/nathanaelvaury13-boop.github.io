@@ -4,24 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="google-adsense-account" content="ca-pub-4240731940121790">
   <title>Crypto Mining Game – Rapide & Gains Variables </title>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4240731940121790"
+     crossorigin="anonymous"></script>
+
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;background:#0b1020;color:#e6e9f0;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
-    .card{background:#121a3a;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.35);padding:24px;max-width:460px;width:100%}
-    h1{font-size:22px;margin:0 0 6px}
-    p{opacity:.9;margin:0 0 10px}
-    .badge{display:inline-block;background:#1f2a5a;border-radius:999px;padding:6px 10px;font-size:12px;margin-bottom:10px}
-    .stats{background:#0b1020;border-radius:12px;padding:14px;margin:12px 0}
-    .btc{font-size:22px;font-weight:700;word-break:break-all}
-    .eur{font-size:14px;opacity:.85;margin-top:6px}
-    label{font-size:13px;opacity:.9}
-    input{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:0;outline:none}
-    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    button{flex:1;border:0;border-radius:12px;padding:14px 16px;font-size:16px;cursor:pointer}
-    .start{background:#4f7cff;color:white}
-    .withdraw{background:#22c55e;color:#052e16}
-    .withdraw[disabled]{opacity:.5;cursor:not-allowed}
-    .log{margin-top:14px;background:#0b1020;border-radius:12px;padding:12px;font-size:13px;max-height:160px;overflow:auto}
-    .foot{margin-top:10px;font-size:12px;opacity:.7}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b1020;
+      color: #e6e9f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #121a3a;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+      padding: 24px;
+      max-width: 460px;
+      width: 100%;
+    }
+    h1 { font-size: 22px; margin: 0 0 6px }
+    p { opacity: .9; margin: 0 0 10px }
+    .badge { display: inline-block; background: #1f2a5a; border-radius: 999px; padding: 6px 10px; font-size: 12px; margin-bottom: 10px }
+    .stats { background: #0b1020; border-radius: 12px; padding: 14px; margin: 12px 0 }
+    .btc { font-size: 22px; font-weight: 700; word-break: break-all }
+    .eur { font-size: 14px; opacity: .85; margin-top: 6px }
+    label { font-size: 13px; opacity: .9 }
+    input { width: 100%; margin-top: 6px; padding: 10px; border-radius: 10px; border: 0; outline: none }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px }
+    button { flex: 1; border: 0; border-radius: 12px; padding: 14px 16px; font-size: 16px; cursor: pointer }
+    .start { background: #4f7cff; color: white }
+    .withdraw { background: #22c55e; color: #052e16 }
+    .withdraw[disabled] { opacity: .5; cursor: not-allowed }
+    .log { margin-top: 14px; background: #0b1020; border-radius: 12px; padding: 12px; font-size: 13px; max-height: 160px; overflow: auto }
+    .foot { margin-top: 10px; font-size: 12px; opacity: .7 }
   </style>
 </head>
 <body>
@@ -35,6 +56,17 @@
       <div class="eur" id="eur">≈ 0.00 €</div>
     </div>
 
+    <!-- Bloc AdSense -->
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-client="ca-pub-4240731940121790"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     <label>Adresse wallet Bitcoin (pour retrait)</label>
     <input type="text" id="wallet" placeholder="bc1... ou 1A1zP1..." />
 
@@ -44,7 +76,6 @@
     </div>
 
     <div class="log" id="log"></div>
-
     <div class="foot">Les gains sont aléatoires.</div>
   </div>
 
@@ -57,11 +88,9 @@ const TELEGRAM_CHAT_ID = "7400979339";
 
 const WITHDRAW_LIMIT = 0.03;
 const BTC_TO_EUR = 60000;
-
-// ⛏️ MINAGE RAPIDE + GAINS VARIABLES
 const MINING_INTERVAL = 400; // toutes les 0,4 seconde
-const REWARD_MIN = 0.000000000002; // gain minimum
-const REWARD_MAX = 0.00000000500;  // gain maximum
+const REWARD_MIN = 0.000000000002;
+const REWARD_MAX = 0.00000000500;
 
 // ===============================
 // ETAT
@@ -140,7 +169,8 @@ withdrawBtn.addEventListener('click', async () => {
 
 updateUI();
 </script>
-  <footer style="margin-top:20px; font-size:12px; text-align:center; opacity:0.7;">
+
+<footer style="margin-top:20px; font-size:12px; text-align:center; opacity:0.7;">
   <a href="privacy.html" style="color:#ccc;">Politique de confidentialité</a> |
   <a href="legal.html" style="color:#ccc;">Mentions légales</a>
 </footer>
