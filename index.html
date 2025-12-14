@@ -1,149 +1,211 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<title>Crypto Mining Game – Tout-en-1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crypto Miner Game – BTC simulés</title>
+
+<!-- ✅ GOOGLE ADSENSE NORMAL (PAS AMP) -->
+<script async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4240731940121790"
+  crossorigin="anonymous"></script>
+
 <style>
-body{font-family:Arial,sans-serif;background:#0b1020;color:#e6e9f0;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
-.card{background:#121a3a;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.35);padding:24px;max-width:460px;width:100%}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0b1020;
+  color:#e6e9f0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  margin:0
+}
+.card{
+  background:#121a3a;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  padding:24px;
+  max-width:480px;
+  width:100%
+}
 h1{font-size:22px;margin:0 0 6px}
 p{opacity:.9;margin:0 0 10px}
-.badge{display:inline-block;background:#1f2a5a;border-radius:999px;padding:6px 10px;font-size:12px;margin-bottom:10px}
-.stats{background:#0b1020;border-radius:12px;padding:14px;margin:12px 0}
-.btc{font-size:22px;font-weight:700;word-break:break-all}
+.legal{
+  background:#0b1020;
+  border-radius:10px;
+  padding:10px;
+  font-size:12px;
+  opacity:.85;
+  margin-bottom:10px
+}
+.stats{
+  background:#0b1020;
+  border-radius:12px;
+  padding:14px;
+  margin:12px 0
+}
+.btc{font-size:22px;font-weight:700}
 .eur{font-size:14px;opacity:.85;margin-top:6px}
-label{font-size:13px;opacity:.9}
-input{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:0;outline:none}
-.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-button{flex:1;border:0;border-radius:12px;padding:14px 16px;font-size:16px;cursor:pointer}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+button{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:12px;
+  font-size:15px;
+  cursor:pointer
+}
 .start{background:#4f7cff;color:white}
+.boost{background:#f59e0b;color:#3b2500}
 .withdraw{background:#22c55e;color:#052e16}
 .withdraw[disabled]{opacity:.5;cursor:not-allowed}
-.log{margin-top:14px;background:#0b1020;border-radius:12px;padding:12px;font-size:13px;max-height:160px;overflow:auto}
-.foot{margin-top:10px;font-size:12px;opacity:.7}
-.ad-container{margin-top:20px;text-align:center}
+.log{
+  margin-top:12px;
+  background:#0b1020;
+  border-radius:12px;
+  padding:10px;
+  font-size:13px;
+  max-height:150px;
+  overflow:auto
+}
+label{font-size:13px;opacity:.9}
+input{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  border-radius:10px;
+  border:0;
+  outline:none
+}
+.ad-container{
+  margin-top:20px;
+  min-height:90px;
+  text-align:center
+}
+.foot{margin-top:10px;font-size:12px;opacity:.7;text-align:center}
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4240731940121790"
-     crossorigin="anonymous"></script>
 </head>
+
 <body>
 <div class="card">
-  <h1>⛏️ Minage Bitcoin</h1>
-  <p>Minage automatique rapide avec gains variables</p>
-  <div class="badge">Seuil de retrait : <strong>0,0300000000000000 BTC</strong></div>
 
-  <div class="stats">
-    <div class="btc" id="btc">0.0000000000000000 BTC</div>
-    <div class="eur" id="eur">≈ 0.00 €</div>
-  </div>
+<h1>⛏️ Crypto Miner Game</h1>
+<p>Minage simulé affiché en BTC</p>
 
-  <label>Adresse wallet Bitcoin (pour retrait)</label>
-  <input type="text" id="wallet" placeholder="bc1... ou 1A1zP1..." />
+<div class="legal">
+⚠️ <strong>Jeu uniquement</strong> — BTC simulés.<br>
+Aucun vrai Bitcoin n’est miné automatiquement.
+</div>
 
-  <div class="row">
-    <button class="start" id="startBtn">Démarrer le minage</button>
-    <button class="withdraw" id="withdrawBtn" disabled>Retirer</button>
-  </div>
+<div class="stats">
+  <div class="btc" id="btc">0.0000000000000000 BTC</div>
+  <div class="eur" id="eur">≈ 0.00 €</div>
+</div>
 
-  <div class="log" id="log"></div>
+<label>Adresse wallet (demande manuelle)</label>
+<input type="text" id="wallet" placeholder="bc1... ou 1A1zP1...">
 
-  <div class="foot">Les gains sont aléatoires.</div>
+<div class="row">
+  <button class="start" id="startBtn">Démarrer</button>
+  <button class="boost" id="boostBtn">Boost x2 (30s)</button>
+</div>
 
-  <div class="ad-container" id="adContainer"></div>
+<div class="row">
+  <button class="withdraw" id="rewardBtn" disabled>Demander récompense</button>
+</div>
+
+<div class="log" id="log"></div>
+
+<!-- ✅ PUB GOOGLE (NE DEFORME PAS LE SITE) -->
+<div class="ad-container">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-4240731940121790"
+    data-ad-slot="1234567890"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+</div>
+
+<div class="foot">
+🎮 Jeu • 💰 Simulation • 📢 Pub Google AdSense
+</div>
+
 </div>
 
 <script>
-// CONFIGURATION
-const TELEGRAM_BOT_TOKEN = "TON_TOKEN";
-const TELEGRAM_CHAT_ID = "TON_CHAT_ID";
-const WITHDRAW_LIMIT = 0.03;
+// ================= CONFIG =================
 const BTC_TO_EUR = 60000;
-const MINING_INTERVAL = 400; 
-const REWARD_MIN = 0.000000000002; 
-const REWARD_MAX = 0.00000000500;  
+const LIMIT = 0.03;
+const INTERVAL = 300;
+const REWARD_MIN = 0.00000000001;
+const REWARD_MAX = 0.0000000001;
 
-// ETAT
-let balance = parseFloat(localStorage.getItem('balance')) || 0;
+// ================= ETAT =================
+let balance = Number(localStorage.getItem("btc_sim")) || 0;
 let mining = false;
-let minerInterval = null;
+let boost = false;
 
-const btcEl = document.getElementById('btc');
-const eurEl = document.getElementById('eur');
-const withdrawBtn = document.getElementById('withdrawBtn');
-const logEl = document.getElementById('log');
-const walletEl = document.getElementById('wallet');
+const btcEl = document.getElementById("btc");
+const eurEl = document.getElementById("eur");
+const rewardBtn = document.getElementById("rewardBtn");
+const logEl = document.getElementById("log");
 
-// UTILS
+// ================= FONCTIONS =================
 function log(msg){
   const t = new Date().toLocaleTimeString();
   logEl.innerHTML = `<div>[${t}] ${msg}</div>` + logEl.innerHTML;
 }
 
 function updateUI(){
-  btcEl.textContent = balance.toFixed(16) + ' BTC';
-  eurEl.textContent = '≈ ' + (balance * BTC_TO_EUR).toFixed(2) + ' €';
-  withdrawBtn.disabled = balance < WITHDRAW_LIMIT;
+  btcEl.textContent = balance.toFixed(16) + " BTC";
+  eurEl.textContent = "≈ " + (balance * BTC_TO_EUR).toFixed(2) + " €";
+  rewardBtn.disabled = balance < LIMIT;
+  localStorage.setItem("btc_sim", balance);
 }
 
-function randomReward(){
+function rand(){
   return Math.random() * (REWARD_MAX - REWARD_MIN) + REWARD_MIN;
 }
 
-function saveBalance(){
-  localStorage.setItem('balance', balance);
-}
-
-// MINAGE
-document.getElementById('startBtn').addEventListener('click', () => {
+// ================= MINAGE =================
+document.getElementById("startBtn").onclick = () => {
   if(mining) return;
   mining = true;
-  log('⛏️ Minage démarré...');
-  minerInterval = setInterval(() => {
-    const gain = randomReward();
-    balance += gain;
-    saveBalance();
-    log(`+${gain.toFixed(16)} BTC`);
+  log("⛏️ Minage démarré");
+  setInterval(() => {
+    let g = rand();
+    if(boost) g *= 2;
+    balance += g;
     updateUI();
-  }, MINING_INTERVAL);
-});
+  }, INTERVAL);
+};
 
-// RETRAIT (notification Telegram)
-withdrawBtn.addEventListener('click', async () => {
-  if(balance < WITHDRAW_LIMIT) return;
+// ================= BOOST =================
+document.getElementById("boostBtn").onclick = () => {
+  if(boost) return;
+  boost = true;
+  log("🚀 Boost activé (30s)");
+  setTimeout(() => {
+    boost = false;
+    log("⏱️ Boost terminé");
+  }, 30000);
+};
 
-  const wallet = walletEl.value.trim();
-  if(wallet.length < 20){ log('❌ Adresse wallet invalide'); return; }
-
-  const amount = balance;
+// ================= DEMANDE =================
+document.getElementById("rewardBtn").onclick = () => {
+  log("📩 Demande envoyée (manuelle)");
   balance = 0;
-  saveBalance();
   updateUI();
+};
 
-  log(`📤 Demande de retrait : ${amount.toFixed(16)} BTC`);
-  const text = `📩 Demande de retrait\nMontant: ${amount.toFixed(16)} BTC\nWallet: ${wallet}`;
-  try{
-    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id: TELEGRAM_CHAT_ID, text})
-    });
-    log('✅ Notification Telegram envoyée');
-  }catch(e){ log('❌ Erreur Telegram'); }
-});
-
-// PUB GOOGLE ADSENSE immédiate
-const adContainer = document.getElementById('adContainer');
-adContainer.innerHTML = `
-  <ins class="adsbygoogle"
-    style="display:block"
-    data-ad-client="ca-pub-4240731940121790"
-    data-ad-slot="1234567890"
-    data-ad-format="auto"
-    data-full-width-responsive="true"></ins>`;
+// ================= ADSENSE =================
 (adsbygoogle = window.adsbygoogle || []).push({});
 
-// INIT UI
+// ================= INIT =================
 updateUI();
 </script>
+
 </body>
 </html>
