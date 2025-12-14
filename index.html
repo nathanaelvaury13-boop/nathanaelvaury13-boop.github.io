@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Miner – Jeu BTC simulé</title>
 
-<title>Crypto Miner Game – BTC simulés</title>
-
-<!-- ✅ GOOGLE ADSENSE NORMAL (PAS AMP) -->
+<!-- GOOGLE ADSENSE -->
 <script async
   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4240731940121790"
   crossorigin="anonymous"></script>
@@ -48,7 +47,16 @@ p{opacity:.9;margin:0 0 10px}
 }
 .btc{font-size:22px;font-weight:700}
 .eur{font-size:14px;opacity:.85;margin-top:6px}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+label{font-size:13px;opacity:.9}
+input{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  border-radius:10px;
+  border:0;
+  outline:none
+}
+.row{display:flex;gap:10px;margin-top:10px}
 button{
   flex:1;
   border:0;
@@ -60,7 +68,6 @@ button{
 .start{background:#4f7cff;color:white}
 .boost{background:#f59e0b;color:#3b2500}
 .withdraw{background:#22c55e;color:#052e16}
-.withdraw[disabled]{opacity:.5;cursor:not-allowed}
 .log{
   margin-top:12px;
   background:#0b1020;
@@ -70,21 +77,18 @@ button{
   max-height:150px;
   overflow:auto
 }
-label{font-size:13px;opacity:.9}
-input{
-  width:100%;
-  margin-top:6px;
-  padding:10px;
-  border-radius:10px;
-  border:0;
-  outline:none
-}
-.ad-container{
+.adsense{
+  display:none;
   margin-top:20px;
   min-height:90px;
   text-align:center
 }
-.foot{margin-top:10px;font-size:12px;opacity:.7;text-align:center}
+.foot{
+  margin-top:10px;
+  font-size:12px;
+  opacity:.7;
+  text-align:center
+}
 </style>
 </head>
 
@@ -95,7 +99,7 @@ input{
 <p>Minage simulé affiché en BTC</p>
 
 <div class="legal">
-⚠️ <strong>Jeu uniquement</strong> — BTC simulés.<br>
+⚠️ Ceci est un <strong>jeu</strong>.<br>
 Aucun vrai Bitcoin n’est miné automatiquement.
 </div>
 
@@ -104,8 +108,8 @@ Aucun vrai Bitcoin n’est miné automatiquement.
   <div class="eur" id="eur">≈ 0.00 €</div>
 </div>
 
-<label>Adresse wallet (demande manuelle)</label>
-<input type="text" id="wallet" placeholder="bc1... ou 1A1zP1...">
+<label>Adresse wallet (simulation)</label>
+<input type="text" id="wallet" placeholder="bc1... ou 1A1zP1..." />
 
 <div class="row">
   <button class="start" id="startBtn">Démarrer</button>
@@ -113,13 +117,13 @@ Aucun vrai Bitcoin n’est miné automatiquement.
 </div>
 
 <div class="row">
-  <button class="withdraw" id="rewardBtn" disabled>Demander récompense</button>
+  <button class="withdraw" id="rewardBtn">Retirer</button>
 </div>
 
 <div class="log" id="log"></div>
 
-<!-- ✅ PUB GOOGLE (NE DEFORME PAS LE SITE) -->
-<div class="ad-container">
+<!-- PUB GOOGLE -->
+<div class="adsense">
   <ins class="adsbygoogle"
     style="display:block"
     data-ad-client="ca-pub-4240731940121790"
@@ -129,7 +133,7 @@ Aucun vrai Bitcoin n’est miné automatiquement.
 </div>
 
 <div class="foot">
-🎮 Jeu • 💰 Simulation • 📢 Pub Google AdSense
+🎮 Jeu • 💰 Simulation • 📢 Google AdSense
 </div>
 
 </div>
@@ -137,7 +141,6 @@ Aucun vrai Bitcoin n’est miné automatiquement.
 <script>
 // ================= CONFIG =================
 const BTC_TO_EUR = 60000;
-const LIMIT = 0.03;
 const INTERVAL = 300;
 const REWARD_MIN = 0.00000000001;
 const REWARD_MAX = 0.0000000001;
@@ -149,7 +152,6 @@ let boost = false;
 
 const btcEl = document.getElementById("btc");
 const eurEl = document.getElementById("eur");
-const rewardBtn = document.getElementById("rewardBtn");
 const logEl = document.getElementById("log");
 
 // ================= FONCTIONS =================
@@ -161,7 +163,6 @@ function log(msg){
 function updateUI(){
   btcEl.textContent = balance.toFixed(16) + " BTC";
   eurEl.textContent = "≈ " + (balance * BTC_TO_EUR).toFixed(2) + " €";
-  rewardBtn.disabled = balance < LIMIT;
   localStorage.setItem("btc_sim", balance);
 }
 
@@ -186,22 +187,25 @@ document.getElementById("startBtn").onclick = () => {
 document.getElementById("boostBtn").onclick = () => {
   if(boost) return;
   boost = true;
-  log("🚀 Boost activé (30s)");
+  log("🚀 Boost x2 activé (30s)");
   setTimeout(() => {
     boost = false;
     log("⏱️ Boost terminé");
   }, 30000);
 };
 
-// ================= DEMANDE =================
+// ================= RETRAIT (SANS LIMITE) =================
 document.getElementById("rewardBtn").onclick = () => {
-  log("📩 Demande envoyée (manuelle)");
+  log("📩 Retrait simulé effectué");
   balance = 0;
   updateUI();
 };
 
 // ================= ADSENSE =================
-(adsbygoogle = window.adsbygoogle || []).push({});
+setTimeout(() => {
+  document.querySelector(".adsense").style.display = "block";
+  (adsbygoogle = window.adsbygoogle || []).push({});
+}, 60000);
 
 // ================= INIT =================
 updateUI();
