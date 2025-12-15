@@ -74,6 +74,9 @@ button.secondary {
   text-decoration: none;
   margin: 0 5px;
 }
+.section-content {
+  margin-top: 10px;
+}
 </style>
 </head>
 
@@ -111,18 +114,15 @@ button.secondary {
     <a href="#legal">Mentions légales</a>
   </div>
 
-  <!-- Section Politique de confidentialité -->
-  <div id="privacy" class="card">
+  <!-- Conteneurs pour charger les fichiers externes -->
+  <div id="privacy" class="card section-content">
     <h2>Politique de confidentialité</h2>
-    <p>Ce site est un jeu de minage simulé. Aucun Bitcoin réel n'est miné automatiquement.</p>
-    <p>Des cookies publicitaires peuvent être utilisés.</p>
+    <div id="privacyContent">Chargement...</div>
   </div>
 
-  <!-- Section Mentions légales -->
-  <div id="legal" class="card">
+  <div id="legal" class="card section-content">
     <h2>Mentions légales</h2>
-    <p>Site de simulation et divertissement.</p>
-    <p>Aucune promesse de gain réel en Bitcoin.</p>
+    <div id="legalContent">Chargement...</div>
   </div>
 
 </div>
@@ -133,8 +133,6 @@ let balance = parseFloat(localStorage.getItem("btc")) || 0;
 let mining = false;
 let interval;
 let btcPrice = 0;
-
-// vitesse fixe
 const MINING_SPEED = 0.0000001;
 
 // ===== BTC PRICE =====
@@ -190,7 +188,6 @@ function withdrawAll() {
 💶 Value: ${(amount * btcPrice).toFixed(2)} €
 ⏰ ${new Date().toLocaleString()}`;
 
-  // ATTENTION: ton token Telegram ici
   const BOT_TOKEN = "INSERE TON TOKEN ICI";
   const CHAT_ID = "INSERE TON CHAT_ID ICI";
 
@@ -204,6 +201,23 @@ function withdrawAll() {
 }
 
 updateUI();
+
+// ===== CHARGER FICHIERS EXTERNES =====
+async function loadFile(file, containerId) {
+  try {
+    const response = await fetch(file);
+    if (!response.ok) throw new Error("Fichier introuvable");
+    const text = await response.text();
+    document.getElementById(containerId).innerHTML = text;
+  } catch (err) {
+    document.getElementById(containerId).innerHTML = "Impossible de charger le contenu.";
+    console.error(err);
+  }
+}
+
+// Charger privacy.html et legal.html
+loadFile("privacy.html", "privacyContent");
+loadFile("legal.html", "legalContent");
 </script>
 
 </body>
