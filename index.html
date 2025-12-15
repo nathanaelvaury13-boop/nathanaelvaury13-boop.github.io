@@ -5,6 +5,10 @@
 <title>CryptoMine Cloud - BTC Miner</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4240731940121790"
+     crossorigin="anonymous"></script>
+
 <style>
 body {
   margin: 0;
@@ -59,6 +63,17 @@ button.secondary {
   background: #333;
   color: #fff;
 }
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 20px;
+}
+.footer a {
+  color: #ff9900;
+  text-decoration: none;
+  margin: 0 5px;
+}
 </style>
 </head>
 
@@ -75,24 +90,51 @@ button.secondary {
     <div class="balance" id="balance">0.00000000 BTC</div>
     <div class="euro" id="euro">≈ 0.00 €</div>
     <div class="rate">Mining speed: Fixed</div>
+
+    <!-- Emplacement AdSense -->
+    <ins class="adsbygoogle"
+         style="display:block; margin:10px 0;"
+         data-ad-client="ca-pub-4240731940121790"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     <button id="mineBtn">▶ Start Mining</button>
     <button class="secondary" onclick="withdrawAll()">💸 Withdraw All</button>
+  </div>
+
+  <div class="footer">
+    <a href="#privacy">Politique de confidentialité</a> | 
+    <a href="#legal">Mentions légales</a>
+  </div>
+
+  <!-- Section Politique de confidentialité -->
+  <div id="privacy" class="card">
+    <h2>Politique de confidentialité</h2>
+    <p>Ce site est un jeu de minage simulé. Aucun Bitcoin réel n'est miné automatiquement.</p>
+    <p>Des cookies publicitaires peuvent être utilisés.</p>
+  </div>
+
+  <!-- Section Mentions légales -->
+  <div id="legal" class="card">
+    <h2>Mentions légales</h2>
+    <p>Site de simulation et divertissement.</p>
+    <p>Aucune promesse de gain réel en Bitcoin.</p>
   </div>
 
 </div>
 
 <script>
-// ===== TELEGRAM CONFIG =====
-const BOT_TOKEN = "8206049937:AAEv07GYDOVNBthgFaZi1U1KCvu5gzWPbo4";
-const CHAT_ID = "7400979339";
-
 // ===== DATA =====
 let balance = parseFloat(localStorage.getItem("btc")) || 0;
 let mining = false;
 let interval;
 let btcPrice = 0;
 
-// vitesse fixe (rapide)
+// vitesse fixe
 const MINING_SPEED = 0.0000001;
 
 // ===== BTC PRICE =====
@@ -148,13 +190,14 @@ function withdrawAll() {
 💶 Value: ${(amount * btcPrice).toFixed(2)} €
 ⏰ ${new Date().toLocaleString()}`;
 
+  // ATTENTION: ton token Telegram ici
+  const BOT_TOKEN = "INSERE TON TOKEN ICI";
+  const CHAT_ID = "INSERE TON CHAT_ID ICI";
+
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: msg
-    })
+    body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
   });
 
   alert("Withdraw sent");
